@@ -1,7 +1,5 @@
 /**
- * This class implements a binary search tree that maintains sorted ordering
- * of its contents. Each node's value is greater than or equal to all values
- * in its left subtree and strictly less than all values in its right subtree.
+ * Binary Tree Implemenatation
  */
 public class BinarySearchTree<T extends Comparable<T>> implements SortedCollection<T> {
     // Reference to the root node of the tree
@@ -14,9 +12,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements SortedCollecti
     }
 
     /**
-     * Inserts a new data value into the sorted collection.
-     * @param data the new value being inserted
-     * @throws NullPointerException if data argument is null
+     * Inserts a new data value into the sorted collection
      */
     @Override
     public void insert(T data) throws NullPointerException {
@@ -34,9 +30,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements SortedCollecti
     }
     /**
      * Performs the naive binary search tree insert algorithm to recursively
-     * insert the provided newNode (which has already been initialized with a
-     * data value) into the provided tree/subtree. When the provided subtree
-     * is null, this method does nothing.
+     * insert the provided newNode
      */
     protected void insertHelper(BinaryNode<T> newNode, BinaryNode<T> subtree) {
         if (subtree == null) {
@@ -46,7 +40,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements SortedCollecti
         // Compare the new node's data with the current subtree's data
         int comparison = newNode.getData().compareTo(subtree.getData());
 
-        if (comparison <= 0) { // Insert in left subtree (including duplicates)
+        if (comparison <= 0) { // Insert in left subtree which includes duplicates
             if (subtree.getLeft() == null) {
                 subtree.setLeft(newNode);
                 newNode.setParent(subtree);
@@ -63,11 +57,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements SortedCollecti
         }
     }
     /**
-     * Check whether data is stored in the tree.
-     * @param data the value to check for in the collection
-     * @return true if the collection contains data one or more times, 
-     *         and false otherwise
-     * @throws NullPointerException if data argument is null
+     * Check whether data is stored in the tree
      */
     @Override
     public boolean contains(Comparable<T> data) throws NullPointerException {
@@ -78,10 +68,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements SortedCollecti
         return containsHelper(data, root);
     }
     /**
-     * Helper method to recursively search for a value in the tree.
-     * @param data the value to search for
-     * @param subtree the current subtree to search in
-     * @return true if the value is found, false otherwise
+     * Helper method to recursively search for a value in the tree
      */
     private boolean containsHelper(Comparable<T> data, BinaryNode<T> subtree) {
         if (subtree == null) {
@@ -123,7 +110,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements SortedCollecti
     }
 
     /**
-     * Checks if the collection is empty.
+     * Checks if the collection is empty and returns null if it is
      * @return true if the collection contains 0 values, false otherwise
      */
     @Override
@@ -132,7 +119,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements SortedCollecti
     }
 
     /**
-     * Removes all values and duplicates from the collection.
+     * Override method to remove all values and duplicates from the collection
      */
     @Override
     public void clear() {
