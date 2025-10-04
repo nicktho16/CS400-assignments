@@ -1,0 +1,32 @@
+ private void rotate(RedBlackNode<T> child, RedBlackNode<T> parent) {
+    RedBlackNode<T> grandparent = (RedBlackNode<T>) parent.getParent();
+
+    if (child == parent.getLeft()) { // Right rotation
+        RedBlackNode<T> temp = (RedBlackNode<T>) child.getRight();
+        child.setRight(parent);
+        parent.setLeft(temp);
+        if (temp != null) temp.setParent(parent);
+
+        child.setParent(grandparent);
+        parent.setParent(child);
+    } else if (child == parent.getRight()) { // Left rotation
+        RedBlackNode<T> temp = (RedBlackNode<T>) child.getLeft();
+        child.setLeft(parent);
+        parent.setRight(temp);
+        if (temp != null) temp.setParent(parent);
+
+        child.setParent(grandparent);
+        parent.setParent(child);
+    } else {
+        throw new IllegalArgumentException("Nodes are not related");
+    }
+
+    // Update grandparent
+    if (grandparent == null) {
+        this.root = child;
+    } else if (grandparent.getLeft() == parent) {
+        grandparent.setLeft(child);
+    } else {
+        grandparent.setRight(child);
+    }
+}
